@@ -19,7 +19,7 @@ object Tester {
       
       val r = new RedisClient("tools-redis", 6379)
       val got = r.get("javamemtest" + heap)
-      if (got.map(_.toInt).getOrElse(Int.MaxValue) < mem){
+      if (got.map(_.toInt).getOrElse(Int.MinValue) < mem){
         r.set("javamemtest" + heap, mem)
       }
     }
