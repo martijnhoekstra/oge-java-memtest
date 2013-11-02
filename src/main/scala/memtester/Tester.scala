@@ -18,7 +18,9 @@ object Tester {
     def writeSuccess(heap : Int, mem : Int) {
       
       val r = new RedisClient("tools-redis", 6379)
-      r.set("javamemtest" + heap, mem)
-      
+      val got = r.get("javamemtest" + heap)
+      if (got.map(_.toInt).getOrElse(Int.MaxValue) < mem){
+        r.set("javamemtest" + heap, mem)
+      }
     }
 }
